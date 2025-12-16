@@ -6,7 +6,7 @@ RUN gradle dependencies --no-daemon || true
 COPY src ./src
 RUN gradle clean build --no-daemon -x test
 
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
 ENV SERVER_PORT=8080
