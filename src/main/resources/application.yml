@@ -18,11 +18,4 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 
 server:
-  port: ${SERVER_PORT}
-
-logging:
-  level:
-    root: INFO
-    com.cicdstudy: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  port: ${SERVER_PORT:8080}
