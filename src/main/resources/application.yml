@@ -5,8 +5,8 @@ spring:
     import: optional:file:.env[.properties]
   datasource:
     url: ${DATABASE_URL:jdbc:mysql://localhost:3308/cicdstudy?useSSL=false&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME:}
+    password: ${DB_PASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
