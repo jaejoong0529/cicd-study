@@ -157,5 +157,6 @@ jobs:
               cicd-prod:
                 driver: bridge
             EOF
-            docker compose -f docker-compose.prod.yml pull
-            docker compose -f docker-compose.prod.yml up -d
+            # 일부 환경에서 compose v2(`docker compose`)가 없을 수 있어 v1 바이너리(`docker-compose`) 사용
+            docker-compose -f docker-compose.prod.yml pull
+            docker-compose -f docker-compose.prod.yml up -d
