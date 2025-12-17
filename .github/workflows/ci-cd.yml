@@ -115,7 +115,6 @@ jobs:
             docker pull ${{ env.IMAGE_NAME }}:latest
             cd /home/${{ secrets.EC2_USER }}/app || mkdir -p /home/${{ secrets.EC2_USER }}/app && cd /home/${{ secrets.EC2_USER }}/app
             cat > docker-compose.prod.yml <<'EOF'
-            version: "3.8"
             services:
               app:
                 image: ${{ env.IMAGE_NAME }}:latest
@@ -128,14 +127,12 @@ jobs:
                     condition: service_healthy
                 networks:
                   - cicd-prod
+                restart: unless-stopped
               mysql:
                 image: mysql:8.0
                 container_name: cicd-mysql-prod
                 env_file:
                   - .env.prod
-                environment:
-                  MYSQL_DATABASE: ${MYSQL_DATABASE}
-                  MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
                 ports:
                   - "3306:3306"
                 volumes:
@@ -148,6 +145,7 @@ jobs:
                 command: --default-authentication-plugin=mysql_native_password
                 networks:
                   - cicd-prod
+                restart: unless-stopped
 
             volumes:
               mysql-prod-data:
